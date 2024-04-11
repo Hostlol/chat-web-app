@@ -1,145 +1,153 @@
 /* General body styles */
 body {
-  background: url('https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjQ4MS1iYi1uaW5nLTEyYl8xLmpwZw.jpg') no-repeat center center fixed;
-  background-size: cover;
-  font-family: 'Arial', sans-serif; /* Ensuring a clean and modern font is used */
+  background-color: #e5ddd5; /* WhatsApp background color */
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* WhatsApp font */
 }
 
 /* Styling the main App container */
 .App {
   text-align: center;
   max-width: 728px;
-  margin: 20px auto; /* Added some margin to the top and bottom */
-  padding: 20px; /* Padding for the paper effect */
-  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-  box-shadow: 0 0 15px rgba(0,0,0,0.2); /* Shadow for a lifted paper effect */
-  border-radius: 8px; /* Rounded corners for the paper */
+margin: 0 auto;
+position: relative;
+}
+
+form {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+transform: translateX(-50%);
+width: 100%;
+max-width: 728px;
+display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+  box-shadow: 0 -1px 10px rgba(0,0,0,0.1);
 }
 
 /* Header styles */
 .App header {
-  background-color: #181717;
+  background-color: #075E54; /* WhatsApp header color */
+  color: #fff;
   height: 10vh;
-  min-height: 50px;
-  color: white;
-  position: sticky;
+  min-height: 60px;
+  position: fixed;
+  width: 100%;
+  max-width: 728px;
   top: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 100;
-  padding: 10px;
+  padding: 0 10px;
   box-sizing: border-box;
 }
 
-/* Section styling */
-.App section {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Changed to flex-start to align items to the top */
-  padding: 20px 0;
+header h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+/* Styling for logout and settings icon using pseudo-elements */
+.sign-out::before {
+  content: '\f08b'; /* FontAwesome icon unicode for sign-out */
+  font-family: 'Font Awesome 5 Free';
+  padding-right: 10px;
 }
 
 /* Main chat area styling */
 main {
-  padding: 10px;
-  margin-top: 60px; /* Adjusted margin to accommodate sticky header */
-  overflow-y: auto;
-  height: calc(100vh - 160px); /* Adjust height calculation to prevent overflow */
+  margin-top: 60px; /* Adjusted margin to accommodate fixed header */
+  height: calc(100vh - 160px);
+  overflow-y: scroll;
+  background: #fff;
 }
 
-/* Scrollbar styles for the chat area */
-main::-webkit-scrollbar {
-  width: 0.25rem;
-}
+/* Form styling */
 
-main::-webkit-scrollbar-track {
-  background: #1e1e24;
-}
-
-main::-webkit-scrollbar-thumb {
-  background: #6649b8;
-}
-
-/* Form styling at the bottom of the chat */
-form {
-  height: 10vh;
-  position: sticky;
-  bottom: 0;
-  background-color: #181717;
-  width: 100%;
-  display: flex;
-  font-size: 1.5rem;
-  padding: 10px;
-  box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
-}
-
-/* Input field styling */
-input {
+form input {
   flex: 1;
-  line-height: 1.5;
-  font-size: 1.5rem;
-  background: #f8f8f8;
-  color: #333;
-  outline: none;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 0 10px;
-  margin-right: 10px;
+  height: 40px; /* Fixed height for input */
+  background: #fff;
+  border: none;
+  border-radius: 18px; /* Rounded input */
+  padding-left: 20px;
 }
 
-/* Button styles for the form */
 form button {
-  width: 100px;
-  background-color: #282c34;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 4px;
-  transition: background-color 0.3s;
+  background-color: #25D366; /* WhatsApp green for buttons */
+  border-radius: 50%; /* Circular button */
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-form button:disabled {
-  background-color: #666;
-}
-
-/* Specific styling for sign-in button */
-.sign-in {
-  color: #282c34;
-  background: white;
-  padding: 10px 20px;
-  border-radius: 4px;
+form button::before {
+  content: '\f1d8'; /* FontAwesome paper plane icon */
+  font-family: 'Font Awesome 5 Free';
+  color: #fff;
 }
 
 /* Message styling */
 .message {
   display: flex;
-  align-items: center;
-  margin-bottom: 12px;
+  margin: 5px 10px;
+  align-items: flex-end;
 }
 
-.sent, .received {
-  flex-direction: row-reverse;
+.sent {
+  justify-content: flex-end;
 }
 
 .sent p, .received p {
-  padding: 10px 20px;
-  border-radius: 25px;
-  max-width: 75%; /* Ensure messages don't span full width */
+  max-width: 240px;
+  padding: 8px 10px;
+  border-radius: 7.5px;
+  margin: 2px;
+  font-size: 0.95rem;
 }
 
 .sent p {
-  background: #0b93f6;
+  background-color: #dcf8c6; /* Light green for sent messages */
 }
 
 .received p {
-  background: #e5e5ea;
-  color: black;
+  background-color: #fff; /* White for received messages */
+  border: 1px solid #eee;
 }
 
-/* Image styles for profile pictures */
+/* Image styling */
 img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  margin: 0 8px;
+  margin: 0 5px;
 }
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.sign-out {
+  padding: 8px 16px;
+  background-color: #128C7E; /* Slightly different shade of WhatsApp green for contrast */
+  color: white;
+  border: none;
+  border-radius: 20px; /* Rounded borders */
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  outline: none;
+}
+
+.sign-out:hover {
+  background-color: #075E54; /* Darker on hover */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adding subtle shadow on hover for depth */
+}
+
