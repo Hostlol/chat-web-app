@@ -30,19 +30,23 @@ const analytics = getAnalytics(app);
 
 function App() {
 
-  const [user] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(auth);
+
+  console.log(user); // Check what the user object contains after sign out and sign in.
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
       <div className="App">
         <header>
           <h1><span role="img" aria-label="Fire">🔥</span> Group Chat</h1>
-          <SignOut />
+          {user ? <SignOut /> : <SignIn />}
         </header>
 
         <section>
           {user ? <ChatRoom /> : <SignIn />}
         </section>
-
       </div>
   );
 }
