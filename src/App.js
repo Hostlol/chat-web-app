@@ -81,10 +81,18 @@ function ChatRoom() {
   const [formValue, setFormValue] = useState('');
 
   useEffect(() => {
-    const q = query(messagesRef, orderBy('createdAt'), limit(25));
+    const messagesRef = collection(firestore, 'messages');
+    // Fetch messages in descending order
+    const q = query(messagesRef, orderBy('createdAt', 'desc'), limit(25));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const messages = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setMessages(messages);
+      const fetchedMessages = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      // Reverse the messages to display them with the oldest at the top
+      setMessages(fetchedMessages.reverse());
+      // Optionally, scroll to the bottom if needed
+      dummy.current?.scrollIntoView({ behavior: 'smooth' });
     }, (error) => {
       console.error("Failed to fetch messages: ", error);
     });
