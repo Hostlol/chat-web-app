@@ -1,22 +1,22 @@
-import React, { useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './App.css';
 
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth';
-import { getFirestore, collection, query, orderBy, limit, addDoc, serverTimestamp } from 'firebase/firestore';
+import { getFirestore, collection, query, orderBy, limit, addDoc, serverTimestamp, onSnapshot } from 'firebase/firestore';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { getAnalytics } from 'firebase/analytics';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
-  measurementId: "YOUR_MEASUREMENT_ID"
+  apiKey: "AIzaSyDGnuNBibQ3G85Kaofv1PoVyGbFz0GA7qg",
+  authDomain: "chat-app-2b806.firebaseapp.com",
+  projectId: "chat-app-2b806",
+  storageBucket: "chat-app-2b806.appspot.com",
+  messagingSenderId: "299410863649",
+  appId: "1:299410863649:web:b0f2f68492fb8ddd519560",
+  measurementId: "G-V36ZZ89BQD"
 };
 
 // Initialize Firebase
@@ -26,26 +26,29 @@ const firestore = getFirestore(app);
 const analytics = getAnalytics(app);
 
 
+
+
 function App() {
 
   const [user] = useAuthState(auth);
 
   return (
-    <div className="App">
-      <header>
-        <h1>⚛️🔥💬</h1>
-        <SignOut />
-      </header>
+      <div className="App">
+        <header>
+          <h1>⚛️🔥💬</h1>
+          <SignOut />
+        </header>
 
-      <section>
-        {user ? <ChatRoom /> : <SignIn />}
-      </section>
+        <section>
+          {user ? <ChatRoom /> : <SignIn />}
+        </section>
 
-    </div>
+      </div>
   );
 }
 
 function SignIn() {
+
   const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider);
@@ -56,42 +59,56 @@ function SignIn() {
         <button className="sign-in" onClick={signInWithGoogle}>Sign in with Google</button>
         <p>Do not violate the community guidelines or you will be banned for life!</p>
       </>
-  );
+  )
+
 }
 
 function SignOut() {
   return auth.currentUser && (
       <button className="sign-out" onClick={() => signOut(auth)}>Sign Out</button>
-  );
+  )
 }
-
 
 
 function ChatRoom() {
   const dummy = useRef();
-  const messagesRef = firestore.collection('messages');
-  const query = messagesRef.orderBy('createdAt').limit(25);
-
-  const [messages] = useCollectionData(query, { idField: 'id' });
-
+  const messagesRef = collection(firestore, 'messages');
+  const [messages, setMessages] = useState([]);
   const [formValue, setFormValue] = useState('');
 
+  useEffect(() => {
+    const q = query(messagesRef, orderBy('createdAt'), limit(25));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const messages = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setMessages(messages);
+    }, (error) => {
+      console.error("Failed to fetch messages: ", error);
+    });
 
-  async function sendMessage(e) {
+    return () => unsubscribe(); // Cleanup subscription on unmount
+  }, []);
+
+  const sendMessage = async (e) => {
     e.preventDefault();
+
+    if (!formValue.trim()) return; // Prevent sending empty messages
 
     const { uid, photoURL } = auth.currentUser;
 
-    await addDoc(collection(firestore, "messages"), {
-      text: formValue,
-      createdAt: serverTimestamp(),
-      uid,
-      photoURL
-    });
+    try {
+      await addDoc(collection(firestore, "messages"), {
+        text: formValue.trim(),
+        createdAt: serverTimestamp(),
+        uid,
+        photoURL
+      });
 
-    setFormValue('');
-    dummy.current.scrollIntoView({ behavior: 'smooth' });
-  }
+      setFormValue('');
+      dummy.current?.scrollIntoView({ behavior: 'smooth' });
+    } catch (error) {
+      console.error("Error sending message: ", error);
+    }
+  };
 
   return (<>
     <main>
