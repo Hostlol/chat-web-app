@@ -8,18 +8,16 @@ body {
 .App {
   text-align: center;
   max-width: 728px;
-margin: 0 auto;
-position: relative;
+  margin: 0 auto; /* Center the container horizontally */
+  position: relative;
 }
 
 form {
-  position: relative;
+  position: fixed; /* Keep the form fixed at the bottom */
   bottom: 0;
-  left: 50%;
-transform: translateX(-50%);
-width: 100%;
-max-width: 728px;
-display: flex;
+  width: 50%;
+  max-width: 728px;
+  display: flex;
   align-items: center;
   padding: 10px;
   background-color: #f0f0f0;
@@ -30,8 +28,7 @@ display: flex;
 .App header {
   background-color: #334464; /* WhatsApp header color */
   color: #fff;
-  height: 10vh;
-  min-height: 60px;
+  height: 60px; /* Adjusted height for the header */
   position: fixed;
   width: 100%;
   max-width: 728px;
@@ -48,23 +45,15 @@ header h1 {
   font-weight: 500;
 }
 
-/* Styling for logout and settings icon using pseudo-elements */
-.sign-out::before {
-  content: '\f08b'; /* FontAwesome icon unicode for sign-out */
-  font-family: 'Font Awesome 5 Free';
-  padding-right: 10px;
-}
-
 /* Main chat area styling */
 main {
   margin-top: 60px; /* Adjusted margin to accommodate fixed header */
-  height: calc(100vh - 160px);
+  height: calc(100vh - 120px); /* Adjusted height for main content */
   overflow-y: scroll;
   background: #ddd8ce;
 }
 
 /* Form styling */
-
 form input {
   flex: 1;
   height: 40px; /* Fixed height for input */
@@ -151,6 +140,7 @@ button:disabled {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adding subtle shadow on hover for depth */
 }
 
+/*Header Styling*/
 header h1 {
   font-size: 200%;
   font-weight: 600;
