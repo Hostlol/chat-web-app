@@ -52,7 +52,7 @@ header h1 {
 .sign-out::before {
   content: '\f08b'; /* FontAwesome icon unicode for sign-out */
   font-family: 'Font Awesome 5 Free';
-  padding-right: 10px;
+  padding-right: 0px;
 }
 
 /* Main chat area styling */
@@ -135,7 +135,7 @@ button:disabled {
 
 .sign-out {
   padding: 8px 16px;
-  background-color: #128C7E; /* Slightly different shade of WhatsApp green for contrast */
+  background-color: #d62300; /* Slightly different shade of WhatsApp green for contrast */
   color: white;
   border: none;
   border-radius: 20px; /* Rounded borders */
@@ -144,10 +144,12 @@ button:disabled {
   cursor: pointer;
   transition: background-color 0.3s;
   outline: none;
+  display: flex; /* Set display to flex */
+  align-items: center;
 }
 
 .sign-out:hover {
-  background-color: #075E54; /* Darker on hover */
+  background-color: #921900; /* Darker on hover */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adding subtle shadow on hover for depth */
 }
 
