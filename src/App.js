@@ -40,10 +40,10 @@ function App() {
   return (
       <div className="App">
         <header>
-          <h1><span role="img" aria-label="Fire">🔥</span> Group Chat</h1>
+          <h1>Group Chat Messaging App</h1>
           {user ? <SignOut /> : <SignIn />}
         </header>
-
+        {/*Check if user is authenticated and provide a prompt if not*/}
         <section>
           {user ? <ChatRoom /> : <SignIn />}
         </section>

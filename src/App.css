@@ -1,6 +1,6 @@
 /* General body styles */
 body {
-  background-color: #e5ddd5; /* WhatsApp background color */
+  background-color: #312f36; /* WhatsApp background color */
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* WhatsApp font */
 }
 
@@ -28,7 +28,7 @@ display: flex;
 
 /* Header styles */
 .App header {
-  background-color: #075E54; /* WhatsApp header color */
+  background-color: #334464; /* WhatsApp header color */
   color: #fff;
   height: 10vh;
   min-height: 60px;
@@ -60,7 +60,7 @@ main {
   margin-top: 60px; /* Adjusted margin to accommodate fixed header */
   height: calc(100vh - 160px);
   overflow-y: scroll;
-  background: #fff;
+  background: #ddd8ce;
 }
 
 /* Form styling */
@@ -68,7 +68,7 @@ main {
 form input {
   flex: 1;
   height: 40px; /* Fixed height for input */
-  background: #fff;
+  background: #ddd8ce;
   border: none;
   border-radius: 18px; /* Rounded input */
   padding-left: 20px;
@@ -89,7 +89,7 @@ form button {
 form button::before {
   content: '\f1d8'; /* FontAwesome paper plane icon */
   font-family: 'Font Awesome 5 Free';
-  color: #fff;
+  color: #ddd8ce;
 }
 
 /* Message styling */
@@ -151,3 +151,11 @@ button:disabled {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adding subtle shadow on hover for depth */
 }
 
+header h1 {
+  font-size: 200%;
+  font-weight: 600;
+  background-image: linear-gradient(to right, #0a7138, #09ad09);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
