@@ -10,13 +10,7 @@ import { getAnalytics } from 'firebase/analytics';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDGnuNBibQ3G85Kaofv1PoVyGbFz0GA7qg",
-  authDomain: "chat-app-2b806.firebaseapp.com",
-  projectId: "chat-app-2b806",
-  storageBucket: "chat-app-2b806.appspot.com",
-  messagingSenderId: "299410863649",
-  appId: "1:299410863649:web:b0f2f68492fb8ddd519560",
-  measurementId: "G-V36ZZ89BQD"
+  // removed private keys
 };
 
 // Initialize Firebase
