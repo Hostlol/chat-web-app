@@ -83,7 +83,7 @@ function ChatRoom() {
   useEffect(() => {
     const messagesRef = collection(firestore, 'messages');
     // Fetch messages in descending order
-    const q = query(messagesRef, orderBy('createdAt', 'desc'), limit(25));
+    const q = query(messagesRef, orderBy('createdAt', 'desc'), limit(100));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const fetchedMessages = snapshot.docs.map(doc => ({
         id: doc.id,
